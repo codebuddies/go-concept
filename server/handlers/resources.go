@@ -13,13 +13,13 @@ import (
 )
 
 type (
-	ResourcesListRequest struct {
+	resourcesListRequest struct {
 		Page    int    `json:"page"`
 		PerPage int    `json:"per_page"`
 		Query   string `json:"q"`
 	}
 
-	ResourcesCreateRequest struct {
+	resourcesCreateRequest struct {
 		Title       string          `json:"title"`
 		Description *string         `json:"description"`
 		URL         string          `json:"url"`
@@ -30,7 +30,7 @@ type (
 )
 
 func (h *Handler) ResourcesList(w http.ResponseWriter, r *http.Request) {
-	var req ResourcesListRequest
+	var req resourcesListRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
 		writeHTTPError(w, http.StatusBadRequest, fmt.Errorf("could not parse request: %s", err))
@@ -47,7 +47,7 @@ func (h *Handler) ResourcesList(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) ResourcesCreate(w http.ResponseWriter, r *http.Request) {
-	var req ResourcesCreateRequest
+	var req resourcesCreateRequest
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&req); err != nil {
 		writeHTTPError(w, http.StatusBadRequest, fmt.Errorf("could not parse request: %s", err))
